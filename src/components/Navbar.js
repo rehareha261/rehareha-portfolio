@@ -1,0 +1,86 @@
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
+import './Navbar.css';
+
+export default function Navbar({ onDownloadCV }) {
+  const { t, selectLanguage, language } = useLanguage();
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setMenuOpen(false);
+  };
+
+  const sections = ['about', 'skills', 'experience', 'education', 'projects', 'contact'];
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  return (
+    <motion.nav
+      className={`nav ${scrolled ? 'nav--scrolled' : ''}`}
+      initial={{ y: -70, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="nav__inner">
+        {/* Logo */}
+        <button className="nav__logo" onClick={() => scrollTo('hero')}>
+          <span className="nav__logo-mark">NR</span>
+          <span className="nav__logo-name">Nala Rehareha</span>
+        </button>
+
+        {/* Center links */}
+        <ul className={`nav__links ${menuOpen ? 'nav__links--open' : ''}`}>
+          {sections.map((s) => (
+            <li key={s}>
+              <button className="nav__link" onClick={() => scrollTo(s)}>
+                {t.nav[s]}
+              </button>
+            </li>
+          ))}
+          <li className="nav__links-cv">
+            <button
+              className="nav__cv nav__cv--mobile"
+              onClick={() => { onDownloadCV(); setMenuOpen(false); }}
+            >
+              {t.nav.downloadCV}
+            </button>
+          </li>
+        </ul>
+
+        {/* Right actions */}
+        <div className="nav__actions">
+          <button
+            className="nav__lang"
+            onClick={() => selectLanguage(language === 'en' ? 'fr' : 'en')}
+            aria-label="Toggle language"
+          >
+            {language === 'en' ? 'FR' : 'EN'}
+          </button>
+          <button className="nav__cv" onClick={onDownloadCV}>
+            {t.nav.downloadCV}
+          </button>
+          <button
+            className={`nav__burger ${menuOpen ? 'nav__burger--open' : ''}`}
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            <span /><span /><span />
+          </button>
+        </div>
+      </div>
+    </motion.nav>
+  );
+}
