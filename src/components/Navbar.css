@@ -185,7 +185,12 @@
 
 /* Mobile drawer */
 @media (max-width: 820px) {
-  .nav { padding: 1rem 0; }
+  .nav {
+    padding: 1rem 0;
+    background: rgba(10,11,9,0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
   .nav--scrolled { padding: 0.7rem 0; }
   .nav__inner { gap: 0.75rem; justify-content: space-between; }
 
