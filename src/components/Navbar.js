@@ -1,86 +1,126 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
-import './Navbar.css';
+
+const SECTIONS = ['about', 'skills', 'experience', 'education', 'projects', 'contact'];
 
 export default function Navbar({ onDownloadCV }) {
   const { t, selectLanguage, language } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
+  const [onHero, setOnHero] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState('intro');
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    const nodes = ['intro', ...SECTIONS]
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          setActive(entry.target.id);
+          setOnHero(entry.target.id === 'intro');
+        });
+      },
+      { rootMargin: '-35% 0px -50% 0px', threshold: 0.01 }
+    );
+
+    nodes.forEach((n) => io.observe(n));
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setMenuOpen(false);
   };
 
-  const sections = ['about', 'skills', 'experience', 'education', 'projects', 'contact'];
-
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [menuOpen]);
-
   return (
-    <motion.nav
-      className={`nav ${scrolled ? 'nav--scrolled' : ''}`}
-      initial={{ y: -70, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <div className="nav__inner">
-        {/* Logo */}
-        <button className="nav__logo" onClick={() => scrollTo('hero')}>
-          <span className="nav__logo-mark">NR</span>
-          <span className="nav__logo-name">Nala Rehareha</span>
+    <>
+      <motion.header
+        className={`site-header ${scrolled ? 'is-scrolled' : ''} ${onHero ? 'is-on-hero' : ''}`}
+        initial={{ y: -24, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <button type="button" className="brand" onClick={() => scrollTo('intro')}>
+          Nala Rehareha
         </button>
 
-        {/* Center links */}
-        <ul className={`nav__links ${menuOpen ? 'nav__links--open' : ''}`}>
-          {sections.map((s) => (
-            <li key={s}>
-              <button className="nav__link" onClick={() => scrollTo(s)}>
-                {t.nav[s]}
-              </button>
-            </li>
-          ))}
-          <li className="nav__links-cv">
+        <nav className="site-nav" aria-label="Primary">
+          {SECTIONS.map((s) => (
             <button
-              className="nav__cv nav__cv--mobile"
-              onClick={() => { onDownloadCV(); setMenuOpen(false); }}
+              key={s}
+              type="button"
+              className={active === s ? 'is-active' : ''}
+              onClick={() => scrollTo(s)}
             >
-              {t.nav.downloadCV}
+              {t.nav[s]}
             </button>
-          </li>
-        </ul>
+          ))}
+        </nav>
 
-        {/* Right actions */}
-        <div className="nav__actions">
+        <div className="header-actions">
           <button
-            className="nav__lang"
+            type="button"
+            className="header-lang"
             onClick={() => selectLanguage(language === 'en' ? 'fr' : 'en')}
             aria-label="Toggle language"
           >
             {language === 'en' ? 'FR' : 'EN'}
           </button>
-          <button className="nav__cv" onClick={onDownloadCV}>
+          <button type="button" className="header-cta" onClick={onDownloadCV}>
             {t.nav.downloadCV}
           </button>
           <button
-            className={`nav__burger ${menuOpen ? 'nav__burger--open' : ''}`}
+            type="button"
+            className={`header-burger ${menuOpen ? 'is-open' : ''}`}
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? t.ui.closeMenu : t.ui.openMenu}
             aria-expanded={menuOpen}
           >
-            <span /><span /><span />
+            <span />
+            <span />
+            <span />
           </button>
         </div>
-      </div>
-    </motion.nav>
+      </motion.header>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="mobile-nav"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.35 }}
+          >
+            {SECTIONS.map((s) => (
+              <button key={s} type="button" onClick={() => scrollTo(s)}>
+                {t.nav[s]}
+              </button>
+            ))}
+            <button type="button" onClick={() => { onDownloadCV(); setMenuOpen(false); }}>
+              {t.nav.downloadCV}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

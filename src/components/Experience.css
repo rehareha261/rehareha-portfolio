@@ -190,7 +190,7 @@
   .experience__tab:last-child { border-right: none; }
   .experience__content { padding: 1.5rem 1.25rem; }
 }
-
 @media (max-width: 480px) {
   .experience__bullet { font-size: 0.84rem; }
 }
+

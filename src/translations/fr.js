@@ -13,8 +13,8 @@ export const fr = {
     greeting: 'Bonjour, je suis',
     name: 'Nala Rehareha',
     fullName: 'RANAIVO RATSIHARINIEFTRA',
-    title: 'Développeur Fullstack',
-    subtitle: "Passionné d'IA & Big Data, venu de Madagascar",
+    title: 'Développeuse Fullstack',
+    subtitle: "Passionnée d'IA & Big Data, venue de Madagascar",
     description: "Je construis des systèmes intelligents et des interfaces fluides des pipelines IA aux applications prêtes pour la production.",
     cta: 'Explorer mes travaux',
     ctaContact: 'Me contacter',
@@ -26,7 +26,7 @@ export const fr = {
     paragraphs: [
     "Étudiante en informatique, passionnée d'IA, mais pas au point de lui confier ma vie. Mon cap : décrocher un diplôme spécialisé et construire quelque chose qui me ressemble.",
     "La tech et moi, ce n'était pas une évidence. Puis j'ai plongé, et je n'ai plus eu envie de remonter. Je prospère dans un monde qui bouge vite et ne s'arrête jamais.",
-    "Ambitieux dans l'âme : maîtriser mon métier, bâtir quelque chose de solide, et finir mes jours loin des écrans, entre les livres, la nature et les bons films.",
+    "Ambitieuse dans l'âme : maîtriser mon métier, bâtir quelque chose de solide, et finir mes jours loin des écrans, entre les livres, la nature et les bons films.",
     ],
     location: 'Antananarivo, Madagascar',
     email: 'rehareharanaivo@gmail.com',
@@ -40,8 +40,8 @@ export const fr = {
       title: 'Langues',
       items: [
         { lang: 'Malgache', level: 'Langue maternelle' },
-        { lang: 'Français', level: 'Avancé' },
-        { lang: 'Anglais', level: 'Avancé' },
+        { lang: 'Français', level: 'Avancée' },
+        { lang: 'Anglais', level: 'Avancée' },
       ],
     },
   },
@@ -77,7 +77,7 @@ export const fr = {
       {
         key: 'soft',
         label: 'Soft Skills',
-        items: ['Pensée stratégique', "Esprit d'équipe", 'Passionné & Motivé', 'Autonome & Débrouillard'],
+        items: ['Pensée stratégique', "Esprit d'équipe", 'Passionnée & Motivée', 'Autonome & Débrouillarde'],
       },
     ],
   },
@@ -86,7 +86,7 @@ export const fr = {
     subtitle: 'Mon parcours professionnel',
     jobs: [
       {
-        role: 'Développeur IA',
+        role: 'Développeuse IA',
         company: 'Smartelia',
         period: "Août 2025 — Aujourd'hui",
         tech: ['Python', 'React JS', 'Angular', 'Next JS', 'Node JS', 'Google Sheets'],
@@ -98,7 +98,7 @@ export const fr = {
         ],
       },
       {
-        role: 'Stagiaire Data & IA Engineer',
+        role: 'Stagiaire Ingénieure Data & IA',
         company: 'Virtuocode',
         period: 'Août 2025 — Décembre 2025',
         tech: ['Python', 'Monday.com', 'Slack', 'LangChain', 'LangGraph'],
@@ -108,7 +108,7 @@ export const fr = {
         ],
       },
       {
-        role: 'Coordinateur Projet, Communication & Événements',
+        role: 'Coordinatrice Projet, Communication & Événements',
         company: 'Peace in Garden',
         period: 'Janvier 2024 — Août 2025',
         tech: ['Google Sheets', "Gestion d'événements", 'Réseaux sociaux'],
@@ -186,7 +186,7 @@ export const fr = {
   },
   contact: {
     title: 'Travaillons Ensemble',
-    subtitle: 'Ouvert aux opportunités — construisons quelque chose de significatif',
+    subtitle: 'Ouverte aux opportunités — construisons quelque chose de significatif',
     nameLabel: 'Votre Nom',
     emailLabel: 'Votre Email',
     messageLabel: 'Votre Message',
@@ -197,7 +197,20 @@ export const fr = {
     orEmail: 'Ou écrire directement à',
   },
   footer: {
-    madeWith: 'Conçu avec curiosité, code & amour des bonnes histoires.',
-    rights: '© 2025 Nala Rehareha. Tous droits réservés.',
+    madeWith: 'Make it happen girl, shock everyone.',
+    rights: '© {year} Nala Rehareha. Tous droits réservés.',
+  },
+  ui: {
+    scrollExplore: 'Scroll to explore',
+    viewCode: 'Voir le code',
+    private: 'Privé / interne',
+    highlight: 'Highlight',
+    chapters: 'Chapitres',
+    intro: 'Intro',
+    quote: "C'est l'esprit qui fait la différence",
+    quoteMark: 'Manifeste',
+    openMenu: 'Ouvrir le menu',
+    closeMenu: 'Fermer le menu',
+    now: 'Now',
   },
 };

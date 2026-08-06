@@ -196,7 +196,20 @@ export const en = {
     orEmail: 'Or write directly to',
   },
   footer: {
-    madeWith: 'Crafted with curiosity, code & a love for good stories.',
-    rights: '© 2025 Nala Rehareha. All rights reserved.',
+    madeWith: 'Make it happen girl, shock everyone.',
+    rights: '© {year} Nala Rehareha. All rights reserved.',
+  },
+  ui: {
+    scrollExplore: 'Scroll to explore',
+    viewCode: 'View code',
+    private: 'Private / internal',
+    highlight: 'Highlight',
+    chapters: 'Chapters',
+    intro: 'Intro',
+    quote: "It's the mind that makes the difference",
+    quoteMark: 'Manifesto',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+    now: 'Now',
   },
 };

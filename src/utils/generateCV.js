@@ -53,7 +53,7 @@ export function generateCV(t, language) {
   doc.setFontSize(12);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(...COLORS.amber);
-  const title = language === 'fr' ? 'Développeur Fullstack · IA & Big Data' : 'Fullstack Developer · AI & Big Data';
+  const title = language === 'fr' ? 'Développeuse Fullstack · IA & Big Data' : 'Fullstack Developer · AI & Big Data';
   doc.text(title, margin, 36);
 
   // Contact in header (right aligned)
@@ -78,7 +78,7 @@ export function generateCV(t, language) {
   doc.setFontSize(9.5);
   doc.setTextColor(...COLORS.gray);
   const summaryText = language === 'fr'
-    ? "Étudiant en informatique avec une véritable passion pour l'IA. Développeur fullstack maîtrisant React, Node.js, Python et les pipelines LLM. Ambitieux, autonome et orienté résultats."
+    ? "Étudiante en informatique avec une véritable passion pour l'IA. Développeuse fullstack maîtrisant React, Node.js, Python et les pipelines LLM. Ambitieuse, autonome et orientée résultats."
     : "Computer Science student with a genuine passion for AI. Fullstack developer skilled in React, Node.js, Python, and LLM pipelines. Ambitious, self-driven, and results-oriented.";
   const summaryLines = doc.splitTextToSize(summaryText, pageWidth - margin * 2);
   doc.text(summaryLines, margin, y);
@@ -200,7 +200,7 @@ export function generateCV(t, language) {
     doc.setFontSize(7.5);
     doc.setTextColor(180, 190, 180);
     doc.text(
-      `Nala Rehareha — ${language === 'fr' ? 'Développeur Fullstack' : 'Fullstack Developer'} · ${i}/${totalPages}`,
+      `Nala Rehareha — ${language === 'fr' ? 'Développeuse Fullstack' : 'Fullstack Developer'} · ${i}/${totalPages}`,
       pageWidth / 2,
       pageHeight - 7,
       { align: 'center' }
