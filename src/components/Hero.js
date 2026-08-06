@@ -1,126 +1,91 @@
-import React, { Suspense } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { useReducedMotion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
-import HeroScene from './three/HeroScene';
-import './Hero.css';
-
-const MARQUEE = [
-  'React', 'Node.js', 'Python', 'LangChain', 'Next.js',
-  'Angular', 'MongoDB', 'Google Gemini', 'LangGraph', 'AI Engineering',
-];
+import useSectionReveal from '../hooks/useSectionReveal';
+import HeroScene from './HeroScene';
 
 export default function Hero() {
   const { t } = useLanguage();
+  const reduce = useReducedMotion();
+  const { ref, inView } = useSectionReveal({ once: true, enterAt: 0.98 });
+
+  const active = reduce || inView;
+  const first = t.hero.name.split(' ')[0];
+  const last = t.hero.name.split(' ').slice(1).join(' ');
 
   return (
-    <section id="hero" className="hero">
-      {/* Right 3D canvas */}
-      <div className="hero__canvas" aria-hidden="true">
-        <Suspense fallback={null}>
-          <HeroScene />
-        </Suspense>
+    <section
+      id="intro"
+      className={`hero${active ? ' is-in' : ''}`}
+      ref={ref}
+      data-chapter="intro"
+      data-revealed={active ? 'true' : 'false'}
+    >
+      <div className="hero__field" aria-hidden="true">
+        <span className="hero__orb hero__orb--1" />
+        <span className="hero__orb hero__orb--2" />
+        <span className="hero__orb hero__orb--3" />
       </div>
 
-      {/* Content layer */}
-      <div className="hero__body">
-        {/* Top bar */}
-        <div className="hero__topbar">
-          <motion.span
-            className="hero__eyebrow"
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.15, duration: 0.7 }}
-          >
-            Fullstack Dev &nbsp;·&nbsp; AI Engineer &nbsp;·&nbsp; 2026
-          </motion.span>
-          <motion.div
-            className="hero__avail"
-            initial={{ opacity: 0, x: 16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.15, duration: 0.7 }}
-          >
-            <span className="hero__avail-dot" />
-            <span>Available</span>
-          </motion.div>
-        </div>
+      <HeroScene className="hero__scene" />
 
-        {/* Name block */}
-        <div className="hero__name-block">
-          <motion.h1
-            className="hero__name"
-            initial={{ opacity: 0, y: 70 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="hero__name-line">Nala</span>
-            <span className="hero__name-line hero__name-indent">Reha<em>reha</em></span>
-          </motion.h1>
-
-          <motion.p
-            className="hero__desc"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.85, duration: 0.8 }}
-          >
-            {t.hero.description}
-          </motion.p>
-        </div>
-
-        {/* Bottom row: stats + CTA */}
-        <motion.div
-          className="hero__foot"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.15, duration: 0.8 }}
+      <div className="hero__stage">
+        <p
+          className="hero__greeting reveal reveal--up"
+          style={{ '--reveal-delay': '80ms' }}
         >
-          <div className="hero__stats">
-            <div className="hero__stat">
-              <b>3+</b><span>Years</span>
-            </div>
-            <div className="hero__stat-sep" />
-            <div className="hero__stat">
-              <b>5+</b><span>Projects</span>
-            </div>
-            <div className="hero__stat-sep" />
-            <div className="hero__stat">
-              <b>4</b><span>Languages</span>
-            </div>
-          </div>
+          {t.hero.greeting}
+        </p>
 
-          <div className="hero__cta">
-            <button
-              className="hero__btn hero__btn--dark"
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              {t.hero.cta}
-            </button>
-            <a
-              href="https://github.com/rehareha261"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hero__btn hero__btn--outline"
-            >
-              GitHub &nbsp;↗
-            </a>
-          </div>
-        </motion.div>
-      </div>
+        <h1 className="hero__name" aria-label={t.hero.name}>
+          <span
+            className="hero__name-line hero__name-line--first reveal reveal--up"
+            style={{ '--reveal-delay': '180ms' }}
+          >
+            {first}
+          </span>
+          <span
+            className="hero__name-line hero__name-line--last reveal reveal--up"
+            style={{ '--reveal-delay': '320ms' }}
+          >
+            {last}
+          </span>
+        </h1>
 
-      {/* Bottom marquee */}
-      <div className="hero__marquee" aria-hidden="true">
-        <div className="hero__marquee-track">
-          {[...MARQUEE, ...MARQUEE].map((item, i) => (
-            <span key={i} className="hero__marquee-item">
-              {item}<span className="hero__marquee-sep">·</span>
-            </span>
-          ))}
+        <div
+          className="hero__meta reveal reveal--up"
+          style={{ '--reveal-delay': '520ms' }}
+        >
+          <p className="hero__title">
+            {t.hero.title}
+            <span className="hero__dot" aria-hidden="true" />
+            {t.hero.subtitle}
+          </p>
+          <p className="hero__lead">{t.hero.description}</p>
+        </div>
+
+        <div
+          className="hero__actions reveal reveal--up"
+          style={{ '--reveal-delay': '700ms' }}
+        >
+          <a className="btn btn--solid magnetic" href="#projects">
+            <span>{t.hero.cta}</span>
+          </a>
+          <a className="btn btn--ghost magnetic" href="#contact">
+            <span>{t.hero.ctaContact}</span>
+          </a>
         </div>
       </div>
 
-      {/* Scroll hint */}
-      <div className="hero__scroll" aria-hidden="true">
-        <div className="hero__scroll-bar" />
-        <span className="hero__scroll-label">scroll</span>
+      <div
+        className="hero__scroll reveal reveal--fade"
+        aria-hidden="true"
+        style={{ '--reveal-delay': '980ms' }}
+      >
+        <div className="hero__scroll-line">
+          <span />
+        </div>
+        <span className="hero__scroll-label">{t.ui.scrollExplore}</span>
       </div>
     </section>
   );
