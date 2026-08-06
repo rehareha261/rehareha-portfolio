@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 /**
  * Global micro-interactions: magnetic CTAs (desktop).
