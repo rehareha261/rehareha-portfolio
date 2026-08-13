@@ -15,7 +15,7 @@ export const en = {
     fullName: 'RANAIVO RATSIHARINIEFTRA',
     title: 'Fullstack Developer',
     subtitle: 'AI & Big Data enthusiast from Madagascar',
-    description: "I build intelligent systems and seamless interfaces from AI pipelines to production-ready apps.",
+    description: "I design AI applications that move from prototype to production — and hold up under real-world load.",
     cta: 'Explore my work',
     ctaContact: 'Get in touch',
     github: 'GitHub',

@@ -15,7 +15,7 @@ export const fr = {
     fullName: 'RANAIVO RATSIHARINIEFTRA',
     title: 'Développeuse Fullstack',
     subtitle: "Passionnée d'IA & Big Data, venue de Madagascar",
-    description: "Je construis des systèmes intelligents et des interfaces fluides des pipelines IA aux applications prêtes pour la production.",
+    description: "Je conçois des applications IA qui passent du prototype à la production — et qui tiennent la charge.",
     cta: 'Explorer mes travaux',
     ctaContact: 'Me contacter',
     github: 'GitHub',
