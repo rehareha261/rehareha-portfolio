@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/rehareha-portfolio/static/css/main.cd1ffddb.css",
+    "main.js": "/rehareha-portfolio/static/js/main.5449814f.js",
+    "static/js/453.5eabfba2.chunk.js": "/rehareha-portfolio/static/js/453.5eabfba2.chunk.js",
+    "index.html": "/rehareha-portfolio/index.html",
+    "main.cd1ffddb.css.map": "/rehareha-portfolio/static/css/main.cd1ffddb.css.map",
+    "main.5449814f.js.map": "/rehareha-portfolio/static/js/main.5449814f.js.map",
+    "453.5eabfba2.chunk.js.map": "/rehareha-portfolio/static/js/453.5eabfba2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cd1ffddb.css",
+    "static/js/main.5449814f.js"
+  ]
+}
