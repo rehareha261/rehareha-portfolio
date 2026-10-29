@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import QuoteBand from './components/QuoteBand';
 import ScrollProgress, { ChapterNav } from './components/ChapterNav';
 import MicroInteractions from './components/MicroInteractions';
+import Maintenance from './components/Maintenance';
 import useLenis from './hooks/useLenis';
 import './components/sections.css';
 
@@ -57,7 +58,13 @@ function Portfolio() {
   );
 }
 
+// The maintenance page is the main page. The portfolio is only hidden, not removed:
+// build with REACT_APP_MAINTENANCE=false to show it again.
+const MAINTENANCE_MODE = process.env.REACT_APP_MAINTENANCE !== 'false';
+
 function App() {
+  if (MAINTENANCE_MODE) return <Maintenance />;
+
   return (
     <LanguageProvider>
       <Portfolio />
